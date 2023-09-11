@@ -15,3 +15,20 @@ DarwinWorld::~DarwinWorld() {
         delete population[k];
     }
 }
+
+void DarwinWorld::evolve(int round, float extinctRatio) {
+    // re-initialise pop
+    for(auto const& pc: population) {
+        pc->newGeneration();
+    }
+/*
+    $this->tournament($round);
+
+    usort($this->population, function ($a, $b) {
+        return $b->getFitness() - $a->getFitness();
+    });
+
+    $this->selectPopulation($extinctRatio);
+
+    $this->logger->log($this->population);*/
+}

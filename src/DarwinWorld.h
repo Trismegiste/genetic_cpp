@@ -17,6 +17,8 @@ class DarwinWorld {
         DarwinWorld(int size, MutableFighterFactory* fac);
         ~DarwinWorld();
         int getSize() const;
+        virtual void evolve(int round, float extinctRatio);
+    
 };
 
 #endif

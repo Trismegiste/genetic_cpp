@@ -4,7 +4,11 @@
 #include "MutableFighter.h"
 
 class Character: public MutableFighter {
-    
+    protected:
+        int victory;
+
+    public:
+        virtual void newGeneration();    
 };
 
 #endif
