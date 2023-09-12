@@ -6,6 +6,7 @@ class Property {
         virtual int get() = 0;
         virtual void mutate() = 0;
         virtual int getCost() = 0;
+        virtual ~Property() {};
 };
 
 #endif

@@ -16,6 +16,7 @@ class Character: public MutableFighter {
         virtual bool isDead();
         virtual void receiveAttack(MutableFighter* pc);
         virtual int getInitiative();
+        Character(std::unordered_map<std::string, Property*> param): MutableFighter(param) {}
 
 
 };

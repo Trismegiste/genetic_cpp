@@ -19,7 +19,8 @@ class MutableFighter {
         virtual void receiveAttack(MutableFighter* pc) = 0;
         virtual int getVictory();
         virtual int getInitiative() = 0;
-        virtual ~MutableFighter() {};
+        MutableFighter(std::unordered_map<std::string, Property*> param);
+        virtual ~MutableFighter();
 };
 
 #endif
