@@ -12,13 +12,17 @@ class DarwinWorld {
 
     protected:
         virtual void selectPopulation(float extinctRatio) = 0;
+        void tournament(int round);
+        void evaluateBestFighter(int round, MutableFighter* pc1, MutableFighter* pc2);
+        virtual MutableFighter* battle(MutableFighter* pc1, MutableFighter* pc2) = 0;
+        virtual std::vector<MutableFighter*> getInitiativeTurn(MutableFighter* pc1, MutableFighter* pc2) = 0;
 
     public:
         DarwinWorld(int size, MutableFighterFactory* fac);
         ~DarwinWorld();
         int getSize() const;
         virtual void evolve(int round, float extinctRatio);
-    
+
 };
 
 #endif

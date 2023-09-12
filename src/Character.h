@@ -5,10 +5,19 @@
 
 class Character: public MutableFighter {
     protected:
-        int victory;
+        bool shaken;
+        int usedBenny;
+        int wound;
 
     public:
-        virtual void newGeneration();    
+        virtual void newGeneration();
+        virtual int getCost();
+        virtual void restart();
+        virtual bool isDead();
+        virtual void receiveAttack(MutableFighter* pc);
+        virtual int getInitiative();
+
+
 };
 
 #endif
