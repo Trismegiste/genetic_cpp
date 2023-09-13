@@ -4,6 +4,8 @@
 #include "MutableFighterFactory.h"
 
 class CharacterFactory : public MutableFighterFactory {
+    protected:
+        static const std::unordered_map<std::string, int> defaultGenome;
 
     public:
         virtual MutableFighter* create(std::unordered_map<std::string, int> param);

@@ -8,15 +8,15 @@
 
 class AttackStrat : public CappedProperty {
 
-public:
-  static const std::vector<std::string> choice;
+    public:
+      static const std::vector<std::string> choice;
 
-  AttackStrat(int v) : CappedProperty(v, 0, 1){};
-  virtual int getCost() { return 0; };
-  friend std::ostream &operator<<(std::ostream &output, const AttackStrat &a) {
-    output << AttackStrat::choice[a.gene];
-    return output;
-  }
+      AttackStrat(int v) : CappedProperty(v, 0, 1){};
+      virtual int getCost() { return 0; };
+      friend std::ostream &operator<<(std::ostream &output, const AttackStrat &a) {
+        output << AttackStrat::choice[a.gene];
+        return output;
+      }
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include "CappedProperty.h"
 #include "Property.h"
-#include <cstdlib>
+#include "random_helper.h"
 
 CappedProperty::CappedProperty(int v, int inf, int sup)
     : Property(v), minValue(inf), maxValue(sup) {}
@@ -11,6 +11,6 @@ void CappedProperty::mutate() {
   } else if (gene == maxValue) {
     gene--;
   } else {
-    gene += (std::rand() < (RAND_MAX / 2)) ? -1 : 1;
+    gene += chaos::oneOrMinusOne();
   }
 }
