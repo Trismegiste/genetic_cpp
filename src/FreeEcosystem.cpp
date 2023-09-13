@@ -1,5 +1,5 @@
 #include "FreeEcosystem.h"
-#include <cstdlib>
+#include "random_helper.h"
 
 FreeEcosystem::FreeEcosystem(int size, const MutableFighterFactory& fac):DarwinWorld(size, fac) {}
 
@@ -26,7 +26,7 @@ std::vector<MutableFighter*> FreeEcosystem::getInitiativeTurn(MutableFighter* pc
     int init2 = pc2->getInitiative();
 
     if (init1 == init2) {
-        init1 += (std::rand() < (RAND_MAX / 2)) ? 1 : -1;
+        init1 += chaos::oneOrMinusOne();
     }
 
     if (init1 > init2) {
