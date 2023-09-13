@@ -2,6 +2,7 @@
 #define Character_INCLUDED
 
 #include "MutableFighter.h"
+#include <unordered_map>
 
 class Character: public MutableFighter {
     protected:
