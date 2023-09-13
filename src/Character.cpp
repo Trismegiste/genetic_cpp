@@ -15,3 +15,5 @@ bool Character::isDead() { return wound > 3; }
 void Character::receiveAttack(MutableFighter *pc) { wound++; }
 
 int Character::getInitiative() { return 5; }
+
+int Character::getFitness() { return victory; }
