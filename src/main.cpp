@@ -6,7 +6,7 @@
 int main(int argc, char *argv[]) {
   int maxGeneration = 100;
   CharacterFactory factory;
-  FreeEcosystem world(22, &factory);
+  FreeEcosystem world(100, factory);
 
   for (int generation = 0; generation < maxGeneration; generation++) {
     std::cout << "Generation " << generation << std::endl;

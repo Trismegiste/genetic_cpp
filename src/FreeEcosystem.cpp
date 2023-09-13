@@ -1,7 +1,7 @@
 #include "FreeEcosystem.h"
 #include <cstdlib>
 
-FreeEcosystem::FreeEcosystem(int size, MutableFighterFactory* fac):DarwinWorld(size, fac) {}
+FreeEcosystem::FreeEcosystem(int size, const MutableFighterFactory& fac):DarwinWorld(size, fac) {}
 
 void FreeEcosystem::selectPopulation(float extinctRatio) {
 }

@@ -7,7 +7,7 @@
 const std::unordered_map<std::string, int> CharacterFactory::defaultGenome = {{"attack",0},{"trademark",0}};
 
 MutableFighter *
-CharacterFactory::create(std::unordered_map<std::string, int> param) {
+CharacterFactory::create(std::unordered_map<std::string, int> param)  const {
   std::unordered_map<std::string, int> defaultParam = CharacterFactory::defaultGenome;
   for(auto override : param) {
     defaultParam[override.first] = override.second;
@@ -21,7 +21,7 @@ CharacterFactory::create(std::unordered_map<std::string, int> param) {
   return new Character(genome);
 }
 
-MutableFighter *CharacterFactory::createRandom() {
+MutableFighter *CharacterFactory::createRandom() const {
   std::unordered_map<std::string, int> param = {
     {"attack", 1},
     {"trademark", 1}
@@ -31,4 +31,4 @@ MutableFighter *CharacterFactory::createRandom() {
 }
 
 MutableFighter *
-CharacterFactory::createSpawn(std::vector<MutableFighter *> partner) {}
+CharacterFactory::createSpawn(std::vector<MutableFighter *> partner) const {}

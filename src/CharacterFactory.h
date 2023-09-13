@@ -8,9 +8,9 @@ class CharacterFactory : public MutableFighterFactory {
         static const std::unordered_map<std::string, int> defaultGenome;
 
     public:
-        virtual MutableFighter* create(std::unordered_map<std::string, int> param);
-        virtual MutableFighter* createRandom();
-        virtual MutableFighter* createSpawn(std::vector<MutableFighter*> partner);
+        virtual MutableFighter* create(std::unordered_map<std::string, int> param) const;
+        virtual MutableFighter* createRandom() const;
+        virtual MutableFighter* createSpawn(std::vector<MutableFighter*> partner) const;
 
 };
 

@@ -2,9 +2,9 @@
 #include <iostream>
 #include <unordered_map>
 
-DarwinWorld::DarwinWorld(int size, MutableFighterFactory *fac) : factory(fac) {
+DarwinWorld::DarwinWorld(int size, const MutableFighterFactory& fac) : factory(fac) {
   for (int k = 0; k < size; k++) {
-    population.push_back(fac->createRandom());
+    population.push_back(fac.createRandom());
   }
 }
 

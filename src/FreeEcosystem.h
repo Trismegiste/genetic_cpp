@@ -11,7 +11,7 @@ class FreeEcosystem : public DarwinWorld {
         virtual std::vector<MutableFighter*> getInitiativeTurn(MutableFighter* pc1, MutableFighter* pc2);
 
     public:
-        FreeEcosystem(int size, MutableFighterFactory* fac);
+        FreeEcosystem(int size, const MutableFighterFactory& fac);
 
 };
 
