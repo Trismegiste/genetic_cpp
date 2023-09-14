@@ -3,13 +3,11 @@
 #include "CappedProperty.h"
 
 class TradeWeaponEdge : public CappedProperty {
-public:
-  TradeWeaponEdge(int v) : CappedProperty(v, 0, 2) {}
-  virtual int getCost() const { return 2 * gene; }
-  virtual std::string toString() const { auto s = std::to_string(gene); return s;}
-  virtual Property* clone() const {
-    return new TradeWeaponEdge(gene);
-  }
+    public:
+        TradeWeaponEdge(int v);
+        virtual int getCost() const;
+        virtual std::string toString() const;
+        virtual Property* clone() const;
 };
 
 #endif
