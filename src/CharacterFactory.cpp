@@ -5,6 +5,9 @@
 #include "Attribute.h"
 #include "Skill.h"
 #include "BennyStrat.h"
+#include "BlockEdge.h"
+#include "LevelHeadedEdge.h"
+#include "QuickEdge.h"
 #include <unordered_map>
 #include "random_helper.h"
 
@@ -16,7 +19,10 @@ const std::unordered_map<std::string, int> CharacterFactory::defaultGenome = {
     {"strength", 6},
     {"spirit", 6},
     {"fighting", 6},
-    {"benny", 0}
+    {"benny", 0},
+    {"block", 0},
+    {"levelhead", 0},
+    {"quick", 0}
 };
 
 MutableFighter *
@@ -36,7 +42,10 @@ CharacterFactory::create(std::unordered_map<std::string, int> param)  const {
         {"vigor", new Attribute(defaultParam["vigor"])},
         {"strength", new Attribute(defaultParam["strength"])},        
         {"spirit", new Attribute(defaultParam["spirit"])},
-        {"benny", new BennyStrat(defaultParam["benny"])}
+        {"benny", new BennyStrat(defaultParam["benny"])},
+        {"block", new BlockEdge(defaultParam["block"])},
+        {"levelhead", new LevelHeadedEdge(defaultParam["levelhead"])},
+        {"quick", new QuickEdge(defaultParam["quick"])}
     };
 
     return new Character(genome);
@@ -51,7 +60,10 @@ MutableFighter *CharacterFactory::createRandom() const {
         {"vigor", 4 + 2 * chaos::randomRange(0, 4)},
         {"strength", 4 + 2 * chaos::randomRange(0, 4)},
         {"spirit", 4 + 2 * chaos::randomRange(0, 4)},
-        {"benny", BennyStrat::getRandomStrat()}
+        {"benny", BennyStrat::getRandomStrat()},
+        {"block", chaos::randomRange(0, 2)},
+        {"levelhead", chaos::randomRange(0, 2)},
+        {"quick", chaos::randomRange(0, 1)}
     };
 
     return create(param);
