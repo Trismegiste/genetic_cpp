@@ -1,6 +1,7 @@
 #include "DarwinWorld.h"
 #include <iostream>
 #include <unordered_map>
+#include <algorithm>
 
 DarwinWorld::DarwinWorld(int size, const MutableFighterFactory& fac, const PopulationLogger& popLogger) : factory(fac), logger(popLogger) {
   for (int k = 0; k < size; k++) {
@@ -23,14 +24,13 @@ void DarwinWorld::evolve(int round, float extinctRatio) {
   }
 
   tournament(round);
-  /*
-  https://stackoverflow.com/questions/1380463/sorting-a-vector-of-custom-objects
 
-      usort($this->population, function ($a, $b) {
-          return $b->getFitness() - $a->getFitness();
-      });
-
-      $this->selectPopulation($extinctRatio);*/
+  std::sort( population.begin(), population.end(), [](const auto& lhs, const auto& rhs)
+  {
+    return lhs->getFitness() > rhs->getFitness();
+  });
+  
+  selectPopulation(extinctRatio);
 
   logger.log(population);
 }
@@ -64,5 +64,17 @@ void DarwinWorld::evaluateBestFighter(int round, MutableFighter *pc1,
   }
   if ((win[pc1] < win[pc2]) && (delta >= 0)) {
     pc2->incVictory();
+  }
+}
+
+void DarwinWorld::selectPopulation(float extinctRatio) {
+  int extinctCount = static_cast<int>(extinctRatio * getSize());
+  std::vector<MutableFighter*> best(population.begin(), population.begin() + extinctCount);
+
+  for (int idx = getSize() - extinctCount; idx < getSize(); idx++) {
+      MutableFighter* child = factory.createSpawn(best);
+      child->mutate();
+      delete population[idx];
+      population[idx] = child;
   }
 }

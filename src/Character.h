@@ -14,7 +14,6 @@ public:
   Character(std::unordered_map<std::string, Property *> param)
       : MutableFighter(param) {}
   virtual void newGeneration();
-  virtual int getCost() const;
   virtual void restart();
   virtual bool isDead() const;
   virtual void receiveAttack(MutableFighter *pc);

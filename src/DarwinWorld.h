@@ -13,7 +13,7 @@ class DarwinWorld {
         const PopulationLogger& logger;
 
     protected:
-        virtual void selectPopulation(float extinctRatio) = 0;
+        virtual void selectPopulation(float extinctRatio);
         void tournament(int round);
         void evaluateBestFighter(int round, MutableFighter* pc1, MutableFighter* pc2);
         virtual MutableFighter* battle(MutableFighter* pc1, MutableFighter* pc2) = 0;

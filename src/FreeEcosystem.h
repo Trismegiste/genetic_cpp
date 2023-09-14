@@ -6,7 +6,6 @@
 class FreeEcosystem : public DarwinWorld {
   
     protected:
-        virtual void selectPopulation(float extinctRatio);
         virtual MutableFighter* battle(MutableFighter* pc1, MutableFighter* pc2);
         virtual std::vector<MutableFighter*> getInitiativeTurn(MutableFighter* pc1, MutableFighter* pc2);
 

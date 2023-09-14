@@ -14,6 +14,7 @@ public:
   virtual int getCost() const = 0;
   virtual std::string toString() const = 0;
   virtual ~Property() {};
+  virtual Property* clone() const = 0;
 };
 
 #endif

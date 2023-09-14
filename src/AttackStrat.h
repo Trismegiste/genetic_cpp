@@ -14,6 +14,8 @@ class AttackStrat : public CappedProperty {
       AttackStrat(int v) : CappedProperty(v, 0, 1){};
       virtual int getCost() const { return 0; };
       virtual std::string toString() const;
+      virtual Property* clone() const;
+
 };
 
 #endif

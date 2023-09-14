@@ -3,9 +3,6 @@
 
 FreeEcosystem::FreeEcosystem(int size, const MutableFighterFactory& fac, const PopulationLogger& popLogger) : DarwinWorld(size, fac, popLogger) {}
 
-void FreeEcosystem::selectPopulation(float extinctRatio) {
-}
-
 MutableFighter* FreeEcosystem::battle(MutableFighter* pc1, MutableFighter* pc2) {
     while (!pc1->isDead() && !pc2->isDead()) {
         std::vector<MutableFighter*> player = getInitiativeTurn(pc1, pc2);

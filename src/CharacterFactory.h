@@ -10,7 +10,7 @@ class CharacterFactory : public MutableFighterFactory {
     public:
         virtual MutableFighter* create(std::unordered_map<std::string, int> param) const;
         virtual MutableFighter* createRandom() const;
-        virtual MutableFighter* createSpawn(std::vector<MutableFighter*> partner) const;
+        virtual MutableFighter* createSpawn(const std::vector<MutableFighter*>& partner) const;
 
 };
 

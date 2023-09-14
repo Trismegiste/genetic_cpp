@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "TradeWeaponEdge.h"
 #include <unordered_map>
+#include "random_helper.h"
 
 const std::unordered_map<std::string, int> CharacterFactory::defaultGenome = {{"attack",0},{"trademark",0}};
 
@@ -23,12 +24,22 @@ CharacterFactory::create(std::unordered_map<std::string, int> param)  const {
 
 MutableFighter *CharacterFactory::createRandom() const {
   std::unordered_map<std::string, int> param = {
-    {"attack", 1},
-    {"trademark", 1}
+    {"attack", chaos::randomRange(0, 1)},
+    {"trademark", chaos::randomRange(0, 2)}
   };
 
   return create(param);
 }
 
-MutableFighter *
-CharacterFactory::createSpawn(std::vector<MutableFighter *> partner) const {}
+MutableFighter* CharacterFactory::createSpawn(const std::vector<MutableFighter*>& partner) const {
+  int numPartners = partner.size();
+  std::unordered_map<std::string, Property*> crossed;
+
+  // Sélectionner au hasard des propriétés de partenaires
+  for (const auto& entry : CharacterFactory::defaultGenome) {
+      int choice = chaos::randomRange(0, numPartners - 1);
+      crossed[entry.first] = partner[choice]->getGenome().at(entry.first)->clone();
+  }
+
+  return new Character(crossed);
+}

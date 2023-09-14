@@ -2,8 +2,6 @@
 
 void Character::newGeneration() { victory = 0; }
 
-int Character::getCost() const { return 0; }
-
 void Character::restart() {
   wound = 0;
   usedBenny = 0;

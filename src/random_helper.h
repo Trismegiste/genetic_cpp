@@ -6,6 +6,7 @@
 namespace chaos {
     int zeroOrOne();
     int oneOrMinusOne();
+    int randomRange(int min, int includedMax);
 }
 
 #endif
