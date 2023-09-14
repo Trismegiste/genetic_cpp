@@ -12,7 +12,9 @@ void Character::restart() {
     shaken = false;
 }
 
-bool Character::isDead() const { return wound > 3; }
+bool Character::isDead() const { 
+    return wound > 3; 
+}
 
 void Character::receiveAttack(MutableFighter *pc) { wound++; }
 
@@ -23,4 +25,6 @@ int Character::getInitiative() {
     return init;
 }
 
-int Character::getFitness() const { return victory; }
+int Character::getFitness() const { 
+    return victory; 
+}
