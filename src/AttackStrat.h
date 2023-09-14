@@ -2,7 +2,6 @@
 #define AttackStrat_INCLUDED
 #include "CappedProperty.h"
 #include "Property.h"
-#include <iostream>
 #include <string>
 #include <vector>
 

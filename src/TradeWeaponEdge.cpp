@@ -8,7 +8,8 @@ int TradeWeaponEdge::getCost() const {
 }
 
 std::string TradeWeaponEdge::toString() const {
-    auto s = std::to_string(gene); return s;
+    auto s = std::to_string(gene);
+    return s;
 }
 
 Property* TradeWeaponEdge::clone() const {
