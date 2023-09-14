@@ -2,7 +2,7 @@
 #include <iostream>
 #include <unordered_map>
 
-DarwinWorld::DarwinWorld(int size, const MutableFighterFactory& fac) : factory(fac) {
+DarwinWorld::DarwinWorld(int size, const MutableFighterFactory& fac, const PopulationLogger& popLogger) : factory(fac), logger(popLogger) {
   for (int k = 0; k < size; k++) {
     population.push_back(fac.createRandom());
   }
@@ -30,9 +30,9 @@ void DarwinWorld::evolve(int round, float extinctRatio) {
           return $b->getFitness() - $a->getFitness();
       });
 
-      $this->selectPopulation($extinctRatio);
+      $this->selectPopulation($extinctRatio);*/
 
-      $this->logger->log($this->population);*/
+  logger.log(population);
 }
 
 void DarwinWorld::tournament(int round) {

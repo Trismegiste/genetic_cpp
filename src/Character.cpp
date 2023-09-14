@@ -2,7 +2,7 @@
 
 void Character::newGeneration() { victory = 0; }
 
-int Character::getCost() { return 0; }
+int Character::getCost() const { return 0; }
 
 void Character::restart() {
   wound = 0;
@@ -10,10 +10,10 @@ void Character::restart() {
   shaken = false;
 }
 
-bool Character::isDead() { return wound > 3; }
+bool Character::isDead() const { return wound > 3; }
 
 void Character::receiveAttack(MutableFighter *pc) { wound++; }
 
 int Character::getInitiative() { return 5; }
 
-int Character::getFitness() { return victory; }
+int Character::getFitness() const { return victory; }

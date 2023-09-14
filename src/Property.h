@@ -1,6 +1,8 @@
 #ifndef Property_INCLUDED
 #define Property_INCLUDED
 
+#include <string>
+
 class Property {
 protected:
   int gene;
@@ -10,6 +12,7 @@ public:
   virtual int get() const { return gene; };
   virtual void mutate() = 0;
   virtual int getCost() const = 0;
+  virtual std::string toString() const = 0;
   virtual ~Property() {};
 };
 

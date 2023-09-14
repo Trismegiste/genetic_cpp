@@ -1,7 +1,7 @@
 #include "FreeEcosystem.h"
 #include "random_helper.h"
 
-FreeEcosystem::FreeEcosystem(int size, const MutableFighterFactory& fac):DarwinWorld(size, fac) {}
+FreeEcosystem::FreeEcosystem(int size, const MutableFighterFactory& fac, const PopulationLogger& popLogger) : DarwinWorld(size, fac, popLogger) {}
 
 void FreeEcosystem::selectPopulation(float extinctRatio) {
 }

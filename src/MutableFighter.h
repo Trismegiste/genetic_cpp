@@ -4,6 +4,7 @@
 #include "Property.h"
 #include <string>
 #include <unordered_map>
+#include <iostream>
 
 class MutableFighter {
 protected:
@@ -11,17 +12,24 @@ protected:
   std::unordered_map<std::string, Property *> genome;
 
 public:
-  virtual void newGeneration() = 0;
-  virtual int getCost() = 0;
-  virtual void restart() = 0;
-  virtual void incVictory();
-  virtual bool isDead() = 0;
-  virtual void receiveAttack(MutableFighter *pc) = 0;
-  virtual int getVictory();
-  virtual int getInitiative() = 0;
   MutableFighter(std::unordered_map<std::string, Property *> param);
   virtual ~MutableFighter();
-  virtual int getFitness() = 0;
+  virtual void newGeneration() = 0;
+  virtual int getCost() const = 0;
+  virtual void restart() = 0;
+  virtual void incVictory();
+  virtual bool isDead() const = 0;
+  virtual void receiveAttack(MutableFighter *pc) = 0;
+  virtual int getVictory() const;
+  virtual int getInitiative() = 0;
+  virtual int getFitness() const = 0;
+  friend std::ostream &operator<<(std::ostream &output, const MutableFighter &a) {
+    for (auto& [key, value]: a.genome) { 
+        output << key << ":" << value->toString() << " ";
+    }
+    output << "win:" << a.getVictory() << " cost:" << a.getCost();
+    return output;
+  }
 };
 
 #endif

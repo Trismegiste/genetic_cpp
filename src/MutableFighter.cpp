@@ -4,7 +4,7 @@ void MutableFighter::incVictory() {
     victory++;
 }
 
-int MutableFighter::getVictory() {
+int MutableFighter::getVictory() const {
     return victory;
 }
 

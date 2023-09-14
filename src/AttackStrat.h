@@ -13,10 +13,7 @@ class AttackStrat : public CappedProperty {
 
       AttackStrat(int v) : CappedProperty(v, 0, 1){};
       virtual int getCost() const { return 0; };
-      friend std::ostream &operator<<(std::ostream &output, const AttackStrat &a) {
-        output << AttackStrat::choice[a.gene];
-        return output;
-      }
+      virtual std::string toString() const;
 };
 
 #endif

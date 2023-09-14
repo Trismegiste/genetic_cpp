@@ -11,15 +11,15 @@ protected:
   int wound;
 
 public:
-  virtual void newGeneration();
-  virtual int getCost();
-  virtual void restart();
-  virtual bool isDead();
-  virtual void receiveAttack(MutableFighter *pc);
-  virtual int getInitiative();
   Character(std::unordered_map<std::string, Property *> param)
       : MutableFighter(param) {}
-  virtual int getFitness();
+  virtual void newGeneration();
+  virtual int getCost() const;
+  virtual void restart();
+  virtual bool isDead() const;
+  virtual void receiveAttack(MutableFighter *pc);
+  virtual int getInitiative();
+  virtual int getFitness() const;
 };
 
 #endif

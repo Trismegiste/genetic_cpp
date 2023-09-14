@@ -1,21 +1,23 @@
 #include "AttackStrat.h"
 #include "CharacterFactory.h"
 #include "FreeEcosystem.h"
+#include "TextLogger.h"
 #include <iostream>
 
-int main(int argc, char *argv[]) {
+int main() {
   int maxGeneration = 100;
+  int popSize = 100;
+  float extinctRatio = 0.05;
+  int battleRound = 9;
+
   CharacterFactory factory;
-  FreeEcosystem world(100, factory);
+  TextLogger logger(extinctRatio);
+  FreeEcosystem world(popSize, factory, logger);
 
   for (int generation = 0; generation < maxGeneration; generation++) {
-    std::cout << "Generation " << generation << std::endl;
-    world.evolve(9, 0.01);
+    std::cout << "==Generation " << generation << "==" << std::endl;
+    world.evolve(battleRound, extinctRatio);
   }
 
-  std::cout << "Hello world !" << std::endl;
-  std::cout << world.getSize() << std::endl;
-
-  AttackStrat strat(1);
-  std::cout << strat << std::endl;
+  return 0;
 }
