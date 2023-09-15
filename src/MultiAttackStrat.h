@@ -9,6 +9,7 @@ class MultiAttackStrat : public CappedProperty {
         virtual int getCost() const;
         virtual std::string toString() const;
         virtual Property* clone() const;
+        int getPenalty() const;
 };
 
 #endif

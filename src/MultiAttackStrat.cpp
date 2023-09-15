@@ -15,3 +15,7 @@ std::string MultiAttackStrat::toString() const {
 Property* MultiAttackStrat::clone() const {
     return new MultiAttackStrat(gene);
 }
+
+int MultiAttackStrat::getPenalty() const {
+    return -2 * (gene - 1);
+}

@@ -3,6 +3,7 @@
 
 #include "MutableFighter.h"
 #include <unordered_map>
+#include <vector>
 
 class Character : public MutableFighter {
     protected:
@@ -23,14 +24,19 @@ class Character : public MutableFighter {
         virtual int getFitness() const;
         int getParry();
         int getToughness();
+        int getWoundsPenalty();
+        std::vector<int> getAttack();
 
     protected:
         bool hasBenny() const;
         bool isShaken() const;
         void useBenny();
         void tryUnshake();
-        int rollTrait(std::string trait) const;
-
+        int rollTrait(const std::string& trait);
+        int getOneAttack();
+        std::vector<int> getOneAttackRateOfFire(int rateOfFire);
+        int rollFighting();
+        std::vector<int> rollFightingRateOfFire(int rateOfFire);
 
 };
 

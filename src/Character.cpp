@@ -5,6 +5,9 @@
 #include "AttackStrat.h"
 #include "Property.h"
 #include "BennyStrat.h"
+#include "dice_roller.h"
+#include "MultiAttackStrat.h"
+#include <algorithm>
 
 void Character::newGeneration() {
     victory = 0;
@@ -41,8 +44,8 @@ bool Character::hasBenny() const {
 
 void Character::receiveAttack(MutableFighter *pc) {
     int parry = getParry();
-  /* std::vector<int> attacks = pc->getAttack();
-
+    std::vector<int> attacks = static_cast<Character*>(pc)->getAttack();
+/*
     for (int attack : attacks) {
         if (attack >= parry) {
             int damage = pc->getDamage();
@@ -78,12 +81,85 @@ void Character::tryUnshake() {
         return;
     }
 
-    if ((genome["benny"]->get() == BennyStrat::SHAKEN_STRAT) && (hasBenny())) {
+    if ((genome["benny"]->get() == BennyStrat::SHAKEN_STRAT) && hasBenny()) {
         shaken = false;
         useBenny();
     }
 }
 
-int Character::rollTrait(std::string trait) const {
+int Character::rollTrait(const std::string& trait) {
+    return DiceRoller::rollJoker(static_cast<SaWoTrait*>(genome[trait])) + getWoundsPenalty();    
+}
 
+int Character::getWoundsPenalty() {
+    int ignore = genome["nervesteel"]->get();
+    int effectiveWound = (wound > ignore) ? (wound - ignore) : 0;
+
+    return -effectiveWound;
+}
+
+std::vector<int> Character::getAttack() {
+    if (isShaken()) {
+        tryUnshake();
+    }
+    if (isShaken()) {
+        return {0};
+    }
+
+    int nb = genome["multiattack"]->get();
+    int rofEdge = genome["frenzy"]->get();
+    int rof = rofEdge;
+    std::vector<int> roll;
+    for (int k = 0; k < nb; k++) {
+        if (rof == 0) {
+            roll.push_back(getOneAttack());
+        } else {
+            std::vector<int> rateOfFireRoll = getOneAttackRateOfFire(rofEdge);
+            roll.insert(roll.end(), rateOfFireRoll.begin(), rateOfFireRoll.end());
+            rof--;
+        }
+    }
+
+    return roll;
+}
+
+int Character::getOneAttack() {
+    int roll = rollFighting();
+    if ((roll < 4) && (genome["benny"]->get() == BennyStrat::ATTACK_STRAT) && hasBenny()) {
+        roll = rollFighting();
+        useBenny();
+    }
+
+    return roll;
+}
+
+std::vector<int> Character::getOneAttackRateOfFire(int rateOfFire) {
+    std::vector<int> roll = rollFightingRateOfFire(rateOfFire);
+
+    if ((*std::max_element(roll.begin(), roll.end()) < 4) && (genome["benny"]->get() == BennyStrat::ATTACK_STRAT) && hasBenny()) {
+        roll = rollFightingRateOfFire(rateOfFire);
+        useBenny();
+    }
+
+    return roll;
+}
+
+int Character::rollFighting() {
+    return rollTrait("fighting") +
+        genome["trademark"]->get() +
+        static_cast<AttackStrat*>(genome["attack"])->getBonus() +
+        static_cast<MultiAttackStrat*>(genome["multiattack"])->getPenalty();
+}
+
+std::vector<int> Character::rollFightingRateOfFire(int rateOfFire) {
+    std::vector<int> pool = DiceRoller::rollJokerRateOfFire(static_cast<SaWoTrait*>(genome["fighting"]), rateOfFire);
+
+    for (int& value : pool) {
+        value += getWoundsPenalty() +
+            genome["trademark"]->get() +
+            static_cast<AttackStrat*>(genome["attack"])->getBonus() +
+            static_cast<MultiAttackStrat*>(genome["multiattack"])->getPenalty();
+    }
+
+    return pool;
 }
