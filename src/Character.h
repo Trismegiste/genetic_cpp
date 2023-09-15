@@ -26,6 +26,10 @@ class Character : public MutableFighter {
 
     protected:
         bool hasBenny() const;
+        bool isShaken() const;
+        void useBenny();
+        void tryUnshake();
+        int rollTrait(std::string trait) const;
 
 
 };

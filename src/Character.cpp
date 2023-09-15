@@ -4,6 +4,7 @@
 #include "Skill.h"
 #include "AttackStrat.h"
 #include "Property.h"
+#include "BennyStrat.h"
 
 void Character::newGeneration() {
     victory = 0;
@@ -57,4 +58,32 @@ int Character::getParry() {
     return static_cast<Skill*>(genome["fighting"])->getDifficulty() +
         genome["block"]->get() -
         static_cast<AttackStrat*>(genome["attack"])->getBonus();
+}
+
+bool Character::isShaken() const {
+    return shaken;
+}
+
+void Character::useBenny() {
+    if (!hasBenny()) {
+        throw std::runtime_error("No more benny to use");
+    }
+    usedBenny++;
+}
+
+void Character::tryUnshake() {
+    int unshake = rollTrait("spirit");
+    if (unshake >= 4) {
+        shaken = false;
+        return;
+    }
+
+    if ((genome["benny"]->get() == BennyStrat::SHAKEN_STRAT) && (hasBenny())) {
+        shaken = false;
+        useBenny();
+    }
+}
+
+int Character::rollTrait(std::string trait) const {
+
 }
