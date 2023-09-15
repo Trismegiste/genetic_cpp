@@ -10,6 +10,8 @@ class BennyStrat : public CappedProperty {
         static const std::vector<std::string> choice;
         static const int SHAKEN_STRAT = 2;
         static const int ATTACK_STRAT = 0;
+        static const int DAMAGE_STRAT = 3;
+        static const int SOAK_STRAT = 1;
 
         BennyStrat(int v) : CappedProperty(v, 0, 3){};
         virtual int getCost() const { return 0; };

@@ -35,7 +35,7 @@
       "stopAtEntry": false,
       "externalConsole": false,
       "cwd": "/home/florent/Develop/genetic_cpp/src",
-      "program": "/home/florent/Develop/genetic_cpp/src/build/Debug/outDebug",
+      "program": "/home/florent/Develop/genetic_cpp/src/build/Release/outRelease",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

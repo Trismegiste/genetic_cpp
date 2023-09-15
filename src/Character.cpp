@@ -44,17 +44,18 @@ bool Character::hasBenny() const {
 
 void Character::receiveAttack(MutableFighter *pc) {
     int parry = getParry();
-    std::vector<int> attacks = static_cast<Character*>(pc)->getAttack();
-/*
+    Character* attacker = static_cast<Character*>(pc);
+    std::vector<int> attacks = attacker->getAttack();
+
     for (int attack : attacks) {
         if (attack >= parry) {
-            int damage = pc->getDamage();
+            int damage = attacker->getDamage();
             if ((attack - parry) >= 4) {
                 damage += DiceRoller::rollExplodingDie(6);
             }
             receiveDamage(damage);
         }
-    }   */ 
+    }   
 }
 
 int Character::getParry() {
@@ -162,4 +163,54 @@ std::vector<int> Character::rollFightingRateOfFire(int rateOfFire) {
     }
 
     return pool;
+}
+
+int Character::getDamage() {
+    int damage = rollDamage();
+
+    if ((damage < 8) && (genome["benny"]->get() == BennyStrat::DAMAGE_STRAT) && hasBenny()) {
+        damage = std::max(damage, rollDamage());
+        useBenny();
+    }
+
+    return damage;
+}
+
+int Character::rollDamage() {
+    int dice = std::min(genome["strength"]->get(), weapon);
+
+    return DiceRoller::roll(static_cast<SaWoTrait*>(genome["strength"])) +
+        DiceRoller::rollExplodingDie(dice) +
+        static_cast<AttackStrat*>(genome["attack"])->getBonus();
+}
+
+void Character::receiveDamage(int damage) {
+    if (damage >= getToughness()) {
+        int delta = (int) ((damage - getToughness()) / 4);
+        addWounds(delta);
+    }
+}
+
+void Character::addWounds(int w) {
+    if (w == 0) {
+        if (shaken) {
+            if ((genome["benny"]->get() == BennyStrat::SHAKEN_STRAT) && hasBenny()) {
+                useBenny();
+            } else {
+                wound++;
+            }
+        } else {
+            shaken = true;
+        }
+    } else {
+        if ((genome["benny"]->get() == BennyStrat::SOAK_STRAT) && hasBenny()) {
+            useBenny();
+            int soak = rollTrait("vigor") / 4;
+            w -= soak;
+        }
+        if (w > 0) {
+            wound += w;
+            shaken = true;
+        }
+    }
 }

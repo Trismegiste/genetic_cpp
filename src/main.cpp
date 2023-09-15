@@ -6,8 +6,8 @@
 
 int main() {
   int maxGeneration = 100;
-  int popSize = 100;
-  float extinctRatio = 0.05;
+  int popSize = 1000;
+  float extinctRatio = 0.01;
   int battleRound = 9;
 
   CharacterFactory factory;

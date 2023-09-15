@@ -26,6 +26,8 @@ class Character : public MutableFighter {
         int getToughness();
         int getWoundsPenalty();
         std::vector<int> getAttack();
+        int getDamage();
+        void receiveDamage(int damage);
 
     protected:
         bool hasBenny() const;
@@ -37,7 +39,8 @@ class Character : public MutableFighter {
         std::vector<int> getOneAttackRateOfFire(int rateOfFire);
         int rollFighting();
         std::vector<int> rollFightingRateOfFire(int rateOfFire);
-
+        int rollDamage();
+        void addWounds(int w);
 };
 
 #endif
