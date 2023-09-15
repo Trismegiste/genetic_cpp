@@ -11,3 +11,7 @@ std::string SaWoTrait::toString() const {
     auto s = std::to_string(get());
     return "d" + s;
 };
+
+int SaWoTrait::getDifficulty() const {
+    return 4 + gene;
+}

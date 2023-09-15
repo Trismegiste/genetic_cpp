@@ -8,13 +8,13 @@
 class AttackStrat : public CappedProperty {
 
     public:
-      static const std::vector<std::string> choice;
+        static const std::vector<std::string> choice;
 
-      AttackStrat(int v) : CappedProperty(v, 0, 1){};
-      virtual int getCost() const { return 0; };
-      virtual std::string toString() const;
-      virtual Property* clone() const;
-
+        AttackStrat(int v) : CappedProperty(v, 0, 1){};
+        virtual int getCost() const { return 0; };
+        virtual std::string toString() const;
+        virtual Property* clone() const;
+        int getBonus() const;
 };
 
 #endif

@@ -8,6 +8,7 @@ class SaWoTrait : public CappedProperty {
         SaWoTrait(int dice);
         virtual int get() const;
         virtual std::string toString() const;
+        virtual int getDifficulty() const;
 };
 
 #endif

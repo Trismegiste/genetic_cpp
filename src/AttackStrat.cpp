@@ -9,3 +9,7 @@ std::string AttackStrat::toString() const {
 Property* AttackStrat::clone() const {
     return new AttackStrat(gene);
 }
+
+int AttackStrat::getBonus() const {
+    return (gene == 1) ? 2 : 0;
+}
