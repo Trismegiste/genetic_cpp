@@ -14,7 +14,7 @@ class Character : public MutableFighter {
         int weapon = 8;
 
     public:
-        Character(std::unordered_map<std::string, Property *> param)
+        Character(const std::unordered_map<std::string, Property *>& param)
             : MutableFighter(param) {}
         virtual void newGeneration();
         virtual void restart();

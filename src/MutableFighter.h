@@ -12,7 +12,7 @@ protected:
   std::unordered_map<std::string, Property *> genome;
 
 public:
-  MutableFighter(std::unordered_map<std::string, Property *> param);
+  MutableFighter(const std::unordered_map<std::string, Property *>& param);
   virtual ~MutableFighter();
   virtual void newGeneration() = 0;
   virtual int getCost() const;

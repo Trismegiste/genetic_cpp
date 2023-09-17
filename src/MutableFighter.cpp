@@ -9,7 +9,7 @@ int MutableFighter::getVictory() const {
     return victory;
 }
 
-MutableFighter::MutableFighter(std::unordered_map<std::string, Property*> param): genome(param) {
+MutableFighter::MutableFighter(const std::unordered_map<std::string, Property*>& param): genome(param) {
 }
 
 MutableFighter::~MutableFighter() {
