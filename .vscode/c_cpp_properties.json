@@ -3,13 +3,11 @@
     {
       "name": "linux-gcc-x64",
       "includePath": [
-        "${workspaceFolder}/**",
-        "/usr/include",
-        "/usr/include/c++/11"
-        ],
-      "compilerPath": "/usr/bin/g++",
+        "${workspaceFolder}/**"
+      ],
+      "compilerPath": "/usr/bin/gcc",
       "cStandard": "${default}",
-      "cppStandard": "${default}",
+      "cppStandard": "c++17",
       "intelliSenseMode": "linux-gcc-x64",
       "compilerArgs": [
         ""

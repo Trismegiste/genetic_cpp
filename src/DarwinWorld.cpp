@@ -13,6 +13,8 @@ int DarwinWorld::getSize() const { return population.size(); }
 
 DarwinWorld::~DarwinWorld() {
   for (int k = 0; k < getSize(); k++) {
+    // @todo That's a bad design => https://www.codeproject.com/Articles/10141/RAII-Dynamic-Objects-and-Factories-in-C
+    // Awesome article : « In a sense, a RAII factory is a mechanism to 'extend' the stack for an indeterminate number of entity objects »
     delete population[k];
   }
 }
@@ -29,7 +31,7 @@ void DarwinWorld::evolve(int round, float extinctRatio) {
   {
     return lhs->getFitness() > rhs->getFitness();
   });
-  
+
   selectPopulation(extinctRatio);
 
   logger.log(population);
